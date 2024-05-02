@@ -28,6 +28,7 @@
 """
 
 def main():
+    
     """
     
     Description -   Encrypts then decrypts a message [loops if user wants to take another guess, in real application the message could delete if guess is not correct]
@@ -39,10 +40,8 @@ def main():
 
     """ 
     
-    
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
 
-    
     caesar_cipher_art = """
  CCCCC   AAA   EEEEE  SSSS   AAA   RRRR    SSSS   ' ' ' SSSS  
 C       A   A  E     S      A   A  R   R  S          '  S     
@@ -59,24 +58,19 @@ C        I   P      H   H E     R  R
 
     print( caesar_cipher_art )
 
-    
     actual_s_k = request_shift_key(alphabet)
     m = request_message(alphabet)
     
-    
     print(m)
-    
     
     e = encrpyt( m, int(actual_s_k), alphabet )
     print(e)
-    
     
     while True:
 
         guessed_s_k = request_shift_key( alphabet )
         
         print('Decryption Result')
-        
     
         d = decrypt( e, int(guessed_s_k), alphabet )
     
@@ -98,8 +92,6 @@ def encrpyt( message, shift_k, a ):
 
     """ 
     
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
-   
     encrpyted_message = []
     character_list = list(message)
     
@@ -109,14 +101,14 @@ def encrpyt( message, shift_k, a ):
         index = 0
         
         while done == False: # find and add encrypted letter
-            if char == alphabet[index]:
+            if char == a[index]:
                 add_index = 0
-                if index + shift_k < len(alphabet):
+                if index + shift_k < len(a):
                     add_index = index + shift_k
-                    encrpyted_message.append(alphabet[add_index])
+                    encrpyted_message.append(a[add_index])
                 else:
-                    add_index = (index + shift_k) - len(alphabet)
-                    encrpyted_message.append(alphabet[add_index])
+                    add_index = (index + shift_k) - len(a)
+                    encrpyted_message.append(a[add_index])
                 done = True
                 
             else:
@@ -124,7 +116,6 @@ def encrpyt( message, shift_k, a ):
                 index+=1
                 
     return encrpyted_message
-
 
 
 def decrypt( message, shift_k_guess, a ): 
@@ -140,8 +131,6 @@ def decrypt( message, shift_k_guess, a ):
 
     """ 
    
-    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
-
     decrypted_m = []
     character_list = list(message)
 
@@ -151,14 +140,14 @@ def decrypt( message, shift_k_guess, a ):
         index = 0
     
         while done == False: # find and add decrypted letter 
-            if char == alphabet[index]:
+            if char == a[index]:
                 add_index = 0
-                if index + shift_k_guess <= len(alphabet):
+                if index + shift_k_guess <= len(a):
                     add_index = index - shift_k_guess
-                    decrypted_m.append(alphabet[add_index])
+                    decrypted_m.append(a[add_index])
                 else:
-                    add_index = (index - shift_k_guess) - len(alphabet)
-                    decrypted_m.append(alphabet[add_index]) # range error with high index
+                    add_index = (index - shift_k_guess) - len(a)
+                    decrypted_m.append(a[add_index]) # range error with high index
                 done = True
                 
             else:
@@ -169,6 +158,7 @@ def decrypt( message, shift_k_guess, a ):
         
     
 def request_shift_key( a ):
+    
     """
     
     Description -   Input func modified to only accept certain values, Only accpeting a few values, in real application could allow for more values with some updates to code
@@ -179,6 +169,7 @@ def request_shift_key( a ):
     -------
 
     """ 
+    
     while True:
         
         # make sure that the result of the input is one of the acceptable choices
@@ -219,6 +210,7 @@ def request_shift_key( a ):
         
     
 def request_message( a ):
+    
     """
     
     Description -   Input func modified to only accept certain values
@@ -229,9 +221,9 @@ def request_message( a ):
     -------
 
     """ 
+    
     while True:
         
-            
         # make sure that the result of the input is one of the acceptable choices
         
         user_input = input( 'What would you like to encrypt? '  ).lower() # set all char to lowercase
@@ -253,11 +245,9 @@ def request_message( a ):
                     done = True
                     if i == len(char):
                         return user_input
-                    
-                    
+                            
                 index +=1 
             i+=1
-            
         
         else: 
             print('Only letters or spaces')
